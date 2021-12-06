@@ -12,14 +12,15 @@ protocol Day {
 }
 
 extension Day {
-    func inputFile(named name: String,
-                   withExtension ext: String = "txt") throws -> [Int] {
+    func inputFile<T>(named name: String,
+                   withExtension ext: String = "txt",
+                      processLine: (Substring) -> T ) throws -> [T] {
         guard let url = Bundle.module.url(forResource: name, withExtension: ext) else {
             fatalError("Input file not found")
         }
         let input = try String(contentsOfFile: url.path)
             .split(separator: "\n")
-            .map { Int($0)! }
+            .map { processLine($0) }
         
         return input
     }

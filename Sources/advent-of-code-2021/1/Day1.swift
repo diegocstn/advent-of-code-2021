@@ -9,7 +9,7 @@ import Foundation
 
 struct Day1: Day {
     func puzzle1() throws {
-        let input = try inputFile(named: "input1")
+        let input = try inputFile(named: "input1") { Int($0)! }
         
         let count = input[1...].reduce((input[0], 0)) { acc, el in
             let (prev, total) = acc
@@ -20,7 +20,7 @@ struct Day1: Day {
     
 
     func puzzle2() throws {
-        let input = try inputFile(named: "input1")
+        let input = try inputFile(named: "input1") { Int($0)! }
         var prev = Int.max
         var count = 0
         for (i, n) in input[0..<input.count - 2].enumerated() {
